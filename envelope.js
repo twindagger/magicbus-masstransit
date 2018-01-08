@@ -16,7 +16,7 @@ const MassTransitEnvelope = (hostAddress) => {
   }
 
   return {
-    getMessage (data, kind) {
+    wrap (data, kind) {
       let messageId = uuid()
       return {
         properties: {
@@ -36,21 +36,11 @@ const MassTransitEnvelope = (hostAddress) => {
         }
       }
     },
-    getRoutingKey (/* data, kind */) {
-      return ''
-    },
-    getData (message) {
-      return message.payload.message || null
-    },
+    getPublishOptions: () => ({}),
     getMessageTypes (message) {
       return message.payload.messageType || []
     },
-    serialize (payload) {
-      return Buffer.from(JSON.stringify(payload), 'utf8')
-    },
-    deserialize (content) {
-      return JSON.parse(content.toString('utf8'))
-    }
+    unwrap: ({ payload = null }) => payload.payload
   }
 }
 
