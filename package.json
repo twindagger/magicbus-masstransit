@@ -1,6 +1,6 @@
 {
   "name": "magicbus-masstransit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provides patterns, envelopes, and configuration to make magicbus work with MassTransit 3.0 and above",
   "main": "index.js",
   "scripts": {
