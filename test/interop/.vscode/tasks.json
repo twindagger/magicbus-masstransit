@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/interop.csproj"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "produce",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "run",
+          "${workspaceFolder}/interop.csproj"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "consume",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "run",
+          "${workspaceFolder}/interop.csproj",
+          "--",
+          "consume"
+        ],
+        "problemMatcher": "$msCompile"
+      }
+    ]
+  }
