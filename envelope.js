@@ -2,7 +2,7 @@ const uuid = require('uuid')
 const os = require('os')
 const pkg = require('./package.json')
 
-const MassTransitEnvelope = (hostAddress) => {
+const MassTransitEnvelope = (hostAddress, serviceDomainName, appName) => {
   const contentType = 'application/vnd.masstransit+json'
   const hostInfo = {
     machineName: os.hostname(),
@@ -28,7 +28,7 @@ const MassTransitEnvelope = (hostAddress) => {
           /* sourceAddress: sourceAddress, */
           destinationAddress: `${hostAddress}${kind}`,
           messageType: [
-            `urn:message:${kind}`
+            `urn:message:${serviceDomainName}.${appName}:${kind}`
           ],
           message: data,
           headers: {},

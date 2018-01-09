@@ -19,8 +19,12 @@ const MagicBusWrapper = (magicbus) => {
           vhost: parsed.path && parsed.path.substring(1)
         }
       }
-      let hostAddress = `rabbitmq://${connectionInfo.server}:${connectionInfo.port}/${connectionInfo.vhost && connectionInfo.vhost !== '/' ? connectionInfo.vhost + '/' : ''}`
-      envelope = MassTransitEnvelope(hostAddress)
+      let portString = connectionInfo.port ? ':' + connectionInfo.port : ''
+      let vhostString = connectionInfo.vhost && connectionInfo.vhost !== '/' && connectionInfo.vhost.toLowerCase() !== '%2f'
+        ? connectionInfo.vhost + '/'
+        : ''
+      let hostAddress = `rabbitmq://${connectionInfo.server}${portString}/${vhostString}`
+      envelope = MassTransitEnvelope(hostAddress, serviceDomainName, appName)
       let broker = magicbus.createBroker(serviceDomainName, appName, connectionInfo, configurator)
       return broker
     },
